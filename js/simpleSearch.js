@@ -21,7 +21,7 @@ $(function(){
 function search(query, $container, $template){
     $.ajax({
         type: 'GET',
-        url: 'http://128.95.157.44:8080/solr-example/collection1/select',
+        url: 'http://216.119.128.66:8080/solr-example/collection1/select',
         dataType: 'JSONP',
         data: {
             'q': query,
