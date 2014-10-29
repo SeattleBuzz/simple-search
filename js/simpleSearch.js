@@ -4,15 +4,15 @@ $(function(){
     // Can be called without any arguments inline 
     function simpleSearch() {
         search( $( "input#query" ).val(), $( "#results" ), $( ".template.result" ) );
-    };
+    }
 
-    $( "button#search" ).click(function() simpleSearch() );
+    $( "button#search" ).click(function() {simpleSearch()} );
 
     // Performs search when 'enter' key is pressed
     $( "input#query" ).keypress(function( event ) {
         if ( event.which == 13 ) simpleSearch();
     });
-})
+});
 
 // Input: query string, results container, result HTML template
 // Effect: makes an AJAX call to the server to get the results of the
@@ -21,7 +21,7 @@ $(function(){
 function search(query, $container, $template){
     $.ajax({
         type: 'GET',
-        url: 'http://216.119.128.66:8080/solr-example/collection1/select',
+        url: 'https://216.119.128.66:8080/solr-example/collection1/select',
         dataType: 'JSONP',
         data: {
             'q': query,
