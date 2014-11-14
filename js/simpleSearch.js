@@ -32,7 +32,7 @@ function search(query, $container, $template){
         },
         jsonp: 'json.wrf',
         success: function (data) {
-            renderResults(data.response.docs, $container, $template);
+            renderResults(data.response.docs, data.spellcheck, $container, $template);
         }
     });
 }
@@ -41,11 +41,12 @@ function search(query, $container, $template){
 // Effect: Replaces results container with new results, and renders
 // the appropriate HTML
 // Output: void
-function renderResults(docs, $container, $template){
+function renderResults(docs, spellcheck, $container, $template){
     $container.empty(); // If there are any previous results, remove them
     var result;
-    $.each(docs, function(index, doc){
+    $.each(docs, spellcheck, function(index, doc, suggestion){
         result = $template.clone();
+        result.find(".suggestion").append(suggestion);
         result.find( ".title > a" )
             .prop( "href", doc.url)
             .find( "h3" )
@@ -54,6 +55,7 @@ function renderResults(docs, $container, $template){
         result.find( ".content" ).append( maxWords(doc.content, 100) );
         result.removeClass( "template" );
         $container.append(result);
+        console.log(result);
     });
 }
 

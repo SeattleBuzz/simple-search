@@ -80,3 +80,7 @@ input#query {
 em {
     font-weight: 700;
 }
+
+.bottom {
+    visibility: hidden;
+}
