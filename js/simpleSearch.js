@@ -81,19 +81,6 @@ function renderResults(docs, spellcheck, $container, $template){
         }
         
     }
-    // $.each(docs, spellcheck, function(index, doc, suggestion){
-    //     result = $template.clone();
-    //     result.find(".suggestion").append(suggestion);
-    //     result.find( ".title > a" )
-    //         .prop( "href", doc.url)
-    //         .find( "h3" )
-    //         .append( doc.title );
-    //     result.find( ".url" ).append( doc.url );
-    //     result.find( ".content" ).append( maxWords(doc.content, 100) );
-    //     result.removeClass( "template" );
-    //     $container.append(result);
-    //     console.log(result);
-    // });
 }
 
 // Cuts off lengthy content to a given maximum number of words
