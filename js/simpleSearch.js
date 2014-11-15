@@ -1,7 +1,8 @@
 // Doc ready
 $(function(){
     // Shortcut function that performs search with the correct parameters.
-    // Can be called without any arguments inline 
+    // Can be called without any arguments inline
+    $(".message").hide(); 
     function simpleSearch() {
         search( $( "input#query" ).val(), $( "#results" ), $( ".template.result" ) );
     }
@@ -21,7 +22,7 @@ $(function(){
 function search(query, $container, $template){
     $.ajax({
         type: 'GET',
-            url: 'http://is-info320t3.ischool.uw.edu:8080/solr-example/collection1/select',
+            url: 'https://is-info320t3.ischool.uw.edu:8443/solr-example/collection1/select',
         dataType: 'JSONP',
         data: {
             'q': query,
@@ -29,6 +30,7 @@ function search(query, $container, $template){
             'wt': 'json',
             'indent': 'false',
             'defType': 'edismax',
+            'spellcheck': 'true',
         },
         jsonp: 'json.wrf',
         success: function (data) {
@@ -44,19 +46,54 @@ function search(query, $container, $template){
 function renderResults(docs, spellcheck, $container, $template){
     $container.empty(); // If there are any previous results, remove them
     var result;
-    $.each(docs, spellcheck, function(index, doc, suggestion){
-        result = $template.clone();
-        result.find(".suggestion").append(suggestion);
-        result.find( ".title > a" )
-            .prop( "href", doc.url)
-            .find( "h3" )
-            .append( doc.title );
-        result.find( ".url" ).append( doc.url );
-        result.find( ".content" ).append( maxWords(doc.content, 100) );
-        result.removeClass( "template" );
-        $container.append(result);
-        console.log(result);
-    });
+    if(docs != null){
+        $.each(docs, function(index, doc){
+            result = $template.clone();
+            result.find( ".title > a" )
+                .prop( "href", doc.url)
+                .find( "h3" )
+                .append( doc.title );
+            result.find( ".url" ).append( doc.url );
+            result.find( ".content" ).append( maxWords(doc.content, 100) );
+            result.removeClass( "template" );
+            $container.append(result);
+            console.log(result);
+        });
+    }
+
+    if(spellcheck != null){
+        var suggestBox = $("#suggestion");
+        suggestBox.empty();
+        $(".message").show();
+        if(spellcheck.suggestions.length > 0){
+            $.each(spellcheck.suggestions[1].suggestion, function(index, suggestion){
+                suggestBox.append("<div class = 'correction'>" + suggestion + "</div>");
+            });
+
+            $(".correction").on("click", function(object){
+                var target = $(object.target);
+                search(target.html(), $container, $template);
+                $("input#query").val(target.html());
+                $(".message").hide();
+            });
+        }else{
+            $(".message").hide();
+        }
+        
+    }
+    // $.each(docs, spellcheck, function(index, doc, suggestion){
+    //     result = $template.clone();
+    //     result.find(".suggestion").append(suggestion);
+    //     result.find( ".title > a" )
+    //         .prop( "href", doc.url)
+    //         .find( "h3" )
+    //         .append( doc.title );
+    //     result.find( ".url" ).append( doc.url );
+    //     result.find( ".content" ).append( maxWords(doc.content, 100) );
+    //     result.removeClass( "template" );
+    //     $container.append(result);
+    //     console.log(result);
+    // });
 }
 
 // Cuts off lengthy content to a given maximum number of words
