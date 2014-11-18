@@ -2,12 +2,14 @@
 @import url(reset.css);
 
 body {
-    background-color: #5F04B4;
+    background-image: url(../img/file5161269796214.jpg);
+    background-size: cover;
+    background-attachment: fixed;
     font-family: "Open Sans", sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 15px;
     line-height: 1.2;
-    color: #333;
+    color: black;
 }
 
 h1 {
@@ -54,7 +56,8 @@ a {
     margin-right: auto;
     padding-bottom: 100%;
     width: 70%;
-    background-color: #8258FA;
+    opacity: 0.85;
+    background-color: #DDD;
 }
 
 button#search {
