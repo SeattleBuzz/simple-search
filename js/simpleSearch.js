@@ -31,6 +31,10 @@ function search(query, $container, $template){
             'indent': 'false',
             'defType': 'edismax',
             'spellcheck': 'true',
+			"hl.simple.pre":"<em>",
+			"hl.simple.post":"<,em>",
+			"hl.fl":"title,content",
+			"hl":"true"
         },
         jsonp: 'json.wrf',
         success: function (data) {
