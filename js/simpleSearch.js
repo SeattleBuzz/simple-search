@@ -58,7 +58,7 @@ function renderResults(docs, spellcheck, $container, $template){
                 .find( "h3" )
                 .append( doc.title );
             result.find( ".url" ).append( doc.url );
-            result.find( ".content" ).append( maxWords(doc.content, 100) );
+            result.find( ".content" ).append( maxWords(doc.content, 25) );
             result.removeClass( "template" );
             $container.append(result);
             console.log(result);
