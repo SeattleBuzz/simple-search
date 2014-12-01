@@ -3,7 +3,7 @@
 
 body {
     background-image: url(https://cloud.githubusercontent.com/assets/9773081/5252967/a8136a96-7957-11e4-9558-44d522ec761f.jpg);
-    background-size: contain;
+    background-size: 100% 100%;
     background-attachment: fixed;
     font-family: "Open Sans", sans-serif;
     font-weight: 500;
