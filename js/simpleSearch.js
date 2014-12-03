@@ -13,6 +13,8 @@ $(function(){
     $( "input#query" ).keypress(function( event ) {
         if ( event.which == 13 ) simpleSearch();
     });
+
+    $('.result').hide();
 });
 
 // Input: query string, results container, result HTML template
@@ -38,6 +40,7 @@ function search(query, $container, $template){
         },
         jsonp: 'json.wrf',
         success: function (data) {
+            console.log(data);
             renderResults(data.response.docs, data.spellcheck, $container, $template);
         }
     });
@@ -49,19 +52,22 @@ function search(query, $container, $template){
 // Output: void
 function renderResults(docs, spellcheck, $container, $template){
     $container.empty(); // If there are any previous results, remove them
-    var result;
+    $('.result').show();
+
+//    var templateClone;
     if(docs != null){
         $.each(docs, function(index, doc){
-            result = $template.clone();
-            result.find( ".title > a" )
-                .prop( "href", doc.url)
-                .find( "h3" )
-                .append( doc.title );
-            result.find( ".url" ).append( doc.url );
-            result.find( ".content" ).append( maxWords(doc.content, 25) );
-            result.removeClass( "template" );
-            $container.append(result);
-            console.log(result);
+            var result = $('<a>', {href: doc.url, class:"list-group-item"});
+            result.append('<h3>');
+            result.append('<p>');
+            result.find('h3').html(doc.title);
+            result.find('p').html(maxWords(doc.content,50));
+            $('#results').append(result);
+
+//                templateClone = $template.clone();
+//                templateClone.removeClass("template");
+
+//                $container.append(templateClone);
         });
     }
 

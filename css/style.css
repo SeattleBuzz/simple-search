@@ -41,15 +41,13 @@ a {
     margin-right: 30%;
 }
 
+
 #results {
     margin-top: 50px;
     margin-left: 50px;
     margin-right: 50px;
 }
 
-.result {
-    margin-bottom: 20px;
-}
 
 .container {
     margin-left: auto;
@@ -86,4 +84,8 @@ em {
 
 .bottom {
     visibility: hidden;
+}
+.list-group{
+    margin:0;
+    border-radius: 0px;
 }
