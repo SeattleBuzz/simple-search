@@ -2,21 +2,24 @@
 @import url(reset.css);
 
 body {
-    background-image: url(https://cloud.githubusercontent.com/assets/9773081/5252967/a8136a96-7957-11e4-9558-44d522ec761f.jpg);
-    background-size: 100% 100%;
-    background-attachment: fixed;
+    background-color: #4c3c4a;
     font-family: "Open Sans", sans-serif;
     font-weight: 500;
     font-size: 15px;
     line-height: 1.2;
     color: black;
 }
+header img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+}
 
 h1 {
     font-size: 350%;
-    font-weight: 300;
+    font-weight: 800;
     text-align: center;
-    color: #610B21;
+    color: #000000;
     margin-bottom: 40px;
     padding-top: 50px;
 }
@@ -55,7 +58,6 @@ a {
     padding-bottom: 100%;
     width: 70%;
     opacity: 0.85;
-    background-color: #DDD;
 }
 
 button#search {
