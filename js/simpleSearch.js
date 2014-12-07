@@ -7,7 +7,7 @@ $(function(){
         search( $( "input#query" ).val(), $( "#results" ), $( ".template.result" ) );
     }
 
-    $( "#search" ).click(function() {simpleSearch()} );
+    $( "[id ='clubs search']" ).click(function() {simpleSearch()} );
 
     // Performs search when 'enter' key is pressed
     $( "input#query" ).keypress(function( event ) {
@@ -33,15 +33,16 @@ function search(query, $container, $template){
             'indent': 'false',
             'defType': 'edismax',
             'spellcheck': 'true',
+            "highlighting": "true",
 			"hl.simple.pre":"<em>",
-			"hl.simple.post":"<,em>",
+			"hl.simple.post":"<em>",
 			"hl.fl":"title,content",
 			"hl":"true"
         },
         jsonp: 'json.wrf',
         success: function (data) {
             console.log(data);
-            renderResults(data.response.docs, data.spellcheck, $container, $template);
+            renderResults(data.response.docs, data.spellcheck, $container, $template, data.highlighting);
         }
     });
 }
@@ -50,9 +51,11 @@ function search(query, $container, $template){
 // Effect: Replaces results container with new results, and renders
 // the appropriate HTML
 // Output: void
-function renderResults(docs, spellcheck, $container, $template){
+function renderResults(docs, spellcheck, $container, $template, highlighting){
     $container.empty(); // If there are any previous results, remove them
     $('.result').show();
+
+    console.log(highlighting);
 
 //    var templateClone;
     if(docs != null){
@@ -60,8 +63,10 @@ function renderResults(docs, spellcheck, $container, $template){
             var result = $('<a>', {href: doc.url, class:"list-group-item"});
             result.append('<h3>');
             result.append('<p>');
+            result.append('<h2>');
             result.find('h3').html(doc.title);
             result.find('p').html(maxWords(doc.content,50));
+//            result.find('h2').html(doc.highlighting."".content);
             $('#results').append(result);
 
 //                templateClone = $template.clone();
@@ -72,25 +77,40 @@ function renderResults(docs, spellcheck, $container, $template){
     }
 
     if(spellcheck != null){
-        var suggestBox = $("#suggestion");
-        suggestBox.empty();
-        $(".message").show();
-        if(spellcheck.suggestions.length > 0){
-            $.each(spellcheck.suggestions[1].suggestion, function(index, suggestion){
-                suggestBox.append("<div class = 'correction'>" + suggestion + "</div>");
-            });
+            var suggestBox = $("#suggestion");
+            suggestBox.empty();
+            $(".message").show();
+            if(spellcheck.suggestions.length > 0){
+                $.each(spellcheck.suggestions[1].suggestion, function(index, suggestion){
+                    suggestBox.append("<div class = 'correction'>" + suggestion + "</div>");
+                });
 
-            $(".correction").on("click", function(object){
-                var target = $(object.target);
-                search(target.html(), $container, $template);
-                $("input#query").val(target.html());
+                $(".correction").on("click", function(object){
+                    var target = $(object.target);
+                    search(target.html(), $container, $template);
+                    $("input#query").val(target.html());
+                    $(".message").hide();
+                });
+            }else{
                 $(".message").hide();
-            });
-        }else{
-            $(".message").hide();
-        }
+            }
         
     }
+//
+//    if(highlighting != null) {
+//        if(highlighting.url.content.length > 0){
+//            $.each(highlighting.url.content[1].highlight, function(index, highlight){
+//                suggestBox.append("<div class = 'correction'>" + highlight + "</div>");
+//            });
+//
+//            $(".correction").on("click", function(object){
+//                var target = $(object.target);
+//                search(target.html(), $container, $template);
+//                $("input#query").val(target.html());
+//                $(".message").hide();
+//            });
+//        }
+//    }
 }
 
 // Cuts off lengthy content to a given maximum number of words
