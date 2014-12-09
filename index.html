@@ -24,7 +24,8 @@
           <!-- The input box where users will enter their query -->
           <input id="query" type="text" placeholder="Search here..." required></input>
             <div  class="row">
-                  <button id="search" class="btn btn-primary">Clubs</button>
+                <button id="club" class="btn btn-primary" data-toggle="popover" data-trigger="hover" title="Click to search within clubs">Clubs</button>
+                <button id="bar" class="btn btn-primary" data-toggle="popover" data-trigger="hover" title="Click to search within bars">Bars</button>
             </div>
         </div>
         <!-- Container where results will be filled in -->
@@ -38,16 +39,11 @@
 
       <!-- Template for results.  Each result is then later inserted into the results container after we get results from a query -->
 
-          <a href="" class="list-group-item template result" target="_blank">
-              <h3 class="list-group-item-heading title"></h3>
-              <!--<h1 class="list-group-item-heading highlighting"></h1>-->
-              <p class="list-group-item-text content"></p>
-          </a>
-
-
-    <footer class="bottom">
-        <p><a href="#top">Back to Top &uarr;</a></p>
-    </footer>
+          <!--<a href="" class="list-group-item template result" target="_blank">-->
+              <!--<h3 class="list-group-item-heading title"></h3>-->
+              <!--&lt;!&ndash;<h1 class="list-group-item-heading highlighting"></h1>&ndash;&gt;-->
+              <!--<p class="list-group-item-text content"></p>-->
+          <!--</a>-->
     </div> <!-- container -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>

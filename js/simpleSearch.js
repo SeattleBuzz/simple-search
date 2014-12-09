@@ -3,11 +3,18 @@ $(function(){
     // Shortcut function that performs search with the correct parameters.
     // Can be called without any arguments inline
     $(".message").hide(); 
+    function simpleSearchC() {
+        search( $( "input#query").val() + ' club', $( "#results" ), $( ".template.result" ) );
+    }
+    function simpleSearchB() {
+        search( $( "input#query").val() + ' bar', $( "#results" ), $( ".template.result" ) );
+    }
     function simpleSearch() {
-        search( $( "input#query" ).val(), $( "#results" ), $( ".template.result" ) );
+        search( $( "input#query").val(), $( "#results" ), $( ".template.result" ) );
     }
 
-    $( "[id ='clubs search']" ).click(function() {simpleSearch()} );
+    $( "[id ='club']" ).click(function() {simpleSearchC()} );
+    $( "[id='bar']" ).click(function () {simpleSearchB()} );
 
     // Performs search when 'enter' key is pressed
     $( "input#query" ).keypress(function( event ) {
@@ -61,13 +68,13 @@ function renderResults(docs, spellcheck, $container, $template, highlighting){
     if(docs != null){
         $.each(docs, function(index, doc){
             var result = $('<a>', {href: doc.url, class:"list-group-item"});
-            result.append('<h3>');
+            result.append('<h3 id="title1">');
             result.append('<p>');
             result.append('<h2>');
             result.find('h3').html(doc.title);
             result.find('p').html(maxWords(doc.content,50));
-//            result.find('h2').html(doc.highlighting."".content);
             $('#results').append(result);
+//            $('#results').append(<br>);
 
 //                templateClone = $template.clone();
 //                templateClone.removeClass("template");
