@@ -78,6 +78,7 @@ button#search {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    font-family: "Open Sans", sans-serif;
 }
 
 input#query {
