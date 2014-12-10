@@ -48,7 +48,7 @@ a {
 
 
 #results {
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: 50px;
     margin-right: 50px;
     font-family: "Open Sans", sans-serif;
@@ -97,12 +97,21 @@ em {
     border-radius: 0px;
 }
 
-#search {
-    margin-top: 50px;
-    width: 100px;
-    height: 100px;
+#club, #bar {
+    margin-top: 20px;
+    width: 80px;
+    height: 40px;
     font-size: 120%;
     position: relative;
     right: 12px;
 
+}
+
+#club {
+    margin-right: 10px;
+}
+
+#title1 {
+    color: #6699ff;
+    font-weight: 800;
 }
