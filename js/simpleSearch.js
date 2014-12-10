@@ -64,9 +64,8 @@ function renderResults(docs, spellcheck, $container, $template, highlighting){
             result.append('<h3>');
             result.append('<p>');
             result.append('<h2>');
-            result.find('h3').html(doc.title);
-            result.find('p').html(maxWords(doc.content,50));
-//            result.find('h2').html(doc.highlighting."".content);
+            result.find('h3').html(highlighting(doc.title));
+            result.find('p').html(highlighting(maxWords(doc.content,50)));
             $('#results').append(result);
 
 //                templateClone = $template.clone();
@@ -112,6 +111,18 @@ function renderResults(docs, spellcheck, $container, $template, highlighting){
 //        }
 //    }
 }
+
+function highlight(text) {
+    query = $( "input#query").val();
+    var textArray = text.split(" ");
+    for(var i = 0; i < textArray.length; i++){
+        if(query != null && query.trim() != "" ){
+            if(textArray[i].contains(query)){
+                textArray[i] = "<span class = 'highlight'>" + textArray[i] + "</span>";
+            }
+        }
+    }
+    return textArray.join(" ");
 
 // Cuts off lengthy content to a given maximum number of words
 // Input: string of words, maximum number of words
