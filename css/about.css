@@ -1,0 +1,11 @@
+h1,h2,h3,p{
+	font family: arial;
+}
+
+h1.sub {
+	color: 6699FF;
+}
+
+/*body {
+	background-color: purple;
+}*/
