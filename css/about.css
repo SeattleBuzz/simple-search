@@ -6,6 +6,7 @@ h1.sub {
 	color: 6699FF;
 }
 
-/*body {
-	background-color: purple;
-}*/
+.home {
+	font-size: 120%;
+    float: right;
+}

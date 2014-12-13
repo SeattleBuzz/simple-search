@@ -109,6 +109,11 @@ em {
 
 }
 
+.about {
+    font-size: 120%;
+    float: right;
+}
+
 #club {
     margin-right: 10px;
 }
